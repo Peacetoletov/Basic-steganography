@@ -110,5 +110,20 @@ namespace Steganography
             }
             bm.Save(revealedImagePath, System.Drawing.Imaging.ImageFormat.Bmp);
         }
+
+        public void RevealHiddenImage(string originalImagePath) {
+            // Opens the image in a default image viewer and deletes the image afterwards
+
+            string tmpPath = "tmpRevealed.png";
+            RevealHiddenImage(originalImagePath, tmpPath);
+            
+            Process p = new Process();  
+            p.StartInfo.UseShellExecute = true;
+            p.StartInfo.FileName = tmpPath;
+            p.Start();
+            System.Threading.Thread.Sleep(4000);
+            File.Delete(tmpPath);
+
+        }
     }
 }
